@@ -1,4 +1,4 @@
-# antd-demo
+# 基于Ant Design React
 
 ## Environment
 
@@ -13,7 +13,11 @@ https://github.com/airbnb/javascript
 ## Develop
 
 ```
-npm run dev
+$ npm install
+```
+
+```
+$ npm run dev
 ```
 
 访问 http://127.0.0.1:8989
@@ -21,5 +25,5 @@ npm run dev
 ## Build
 
 ```
-npm run build
+$ npm run build
 ```
