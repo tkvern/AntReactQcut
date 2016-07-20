@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router'
 import { Menu, Breadcrumb, Icon } from 'antd';
 import './MainLayout.less';
 const SubMenu = Menu.SubMenu;
@@ -12,6 +13,16 @@ const MainLayout = React.createClass({
       collapse: false,
     };
   },
+
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
+  getSelectIndex() {
+    return this.context.router.isActive('/') ? 'laptop' :
+      this.context.router.isActive('/order') ? 'order' : '';
+  },
+
   onCollapseChange() {
     this.setState({
       collapse: !this.state.collapse,
@@ -32,12 +43,16 @@ const MainLayout = React.createClass({
         </div>
         <aside className="ant-layout-sider">
           <div className="ant-layout-logo"></div>
-          <Menu mode="inline" theme="dark" defaultSelectedKeys={['laptop']}>
+          <Menu mode="inline" theme="dark" defaultSelectedKeys={[this.getSelectIndex()]}>
             <Menu.Item key="laptop">
-              <Icon type="laptop" /><span className="nav-text">控制台</span>
+              <Link to="/">
+                <Icon type="laptop" /><span className="nav-text">控制台</span>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="book">
-              <Icon type="book" /><span className="nav-text">订单管理</span>
+            <Menu.Item key="order">
+              <Link to="/order">
+                <Icon type="book" /><span className="nav-text">订单管理</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="user">
               <Icon type="user" /><span className="nav-text">员工管理</span>
