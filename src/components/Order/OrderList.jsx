@@ -3,22 +3,22 @@ import { Table } from 'antd';
 import reqwest from 'reqwest';
 
 const columns = [{
-  title: '姓名',
+  title: '订单编号',
+  dataIndex: 'registered',
+  width: '20%',
+}, {
+  title: '创建时间',
+  dataIndex: 'gender',
+  sorter: true,
+  render: gender => `${gender}`,
+  width: '20%',
+}, {
+  title: '服务人员',
   dataIndex: 'name',
   sorter: true,
   render: name => `${name.first} ${name.last}`,
-  width: '20%',
 }, {
-  title: '性别',
-  dataIndex: 'gender',
-  filters: [
-    { text: 'Male', value: 'male' },
-    { text: 'Female', value: 'female' },
-  ],
-  width: '20%',
-}, {
-  title: '邮箱',
-  dataIndex: 'email',
+
 }];
 
 const OrderList = React.createClass({
