@@ -87,7 +87,7 @@ const MainLayout = React.createClass({
             </div>
           </div>
           <div className="ant-layout-footer">
-          基于 Ant Design © 2016 智泽东裕科技有限公司
+          基于 Ant Design © 2016 
           </div>
         </div>
       </div>
