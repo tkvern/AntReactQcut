@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router'
 import { Menu, Breadcrumb, Icon } from 'antd';
+import AuthLogOut from '../../components/Auth/AuthLogOut';
 import './MainLayout.less';
 const SubMenu = Menu.SubMenu;
 
@@ -18,9 +19,22 @@ const MainLayout = React.createClass({
     router: React.PropTypes.object.isRequired
   },
 
+  componentWillMount() {
+    console.log('componentWillMount');
+    if(localStorage.getItem('userinfo') == null){
+      this.context.router.push('/login');
+    }
+  },
+
   getSelectIndex() {
     return this.context.router.isActive('/') ? 'laptop' :
       this.context.router.isActive('/order') ? 'order' : '';
+  },
+
+  getUserInfo() {
+    return localStorage.getItem('userinfo') != null ? 
+      JSON.parse(localStorage.getItem('userinfo')).user.nick : 
+      '未登录'
   },
 
   onCollapseChange() {
@@ -29,15 +43,31 @@ const MainLayout = React.createClass({
     })
   },
   render() {
+    let UserInfo;
+    if(localStorage.getItem('userinfo') != null){
+      UserInfo = (
+        <div>
+          <li>{ this.getUserInfo() }</li>
+          <li>|</li>
+          <li><AuthLogOut /></li>
+        </div>
+      )
+    } else {
+      UserInfo = (
+        <div>
+          <li> 未登录 </li>
+          <li>|</li>
+          <li><AuthLogOut /></li>
+        </div>
+      )
+    }
     const collapse = this.state.collapse;
     return (
       <div className={collapse ? "ant-layout-aside ant-layout-aside-collapse" : "ant-layout-aside"}>
         <div className="ant-layout-ceiling">
           <div className="ant-layout-wrapper">
             <ul className="right">
-              <li>user@example.com</li>
-              <li>|</li>
-              <li>退出登录</li>
+              { UserInfo }
             </ul>
           </div>
         </div>
