@@ -1,39 +1,3 @@
-// import React, { Component, PropTypes } from 'react';
-// import MainLayout from '../../layouts/MainLayout/MainLayout';
-// import reqwest from 'reqwest';
-
-// const ConsoleIndex = React.createClass({
-//   contextTypes: {
-//     router: React.PropTypes.object.isRequired
-//   },
-
-//   fetch(params = {}) {
-//     reqwest({
-//       url: 'http://z005.kmtongji.com/api/users',
-//       method: 'get',
-//       data: {
-//       },
-//       type: 'json',
-//       crossOrigin: true,
-//       withCredentials: true,
-//       'Access-Control-Allow-Origin': true,
-//       'set-cookie': document.cookie,
-//     }).then(data => {
-      
-//     });
-//   },
-
-//   render(){
-//     return (
-//       <MainLayout>
-//         用户列表
-//         { this.fetch() }
-//       </MainLayout>
-//     );
-//   },
-// });
-
-
 // export default ConsoleIndex;
 
 import React, { Component, PropTypes } from 'react';
@@ -49,11 +13,6 @@ const columns = [{
   title: '昵称',
   dataIndex: 'nick',
   width: '20%',
-// }, {
-//   title: '服务人员',
-//   dataIndex: 'name',
-//   sorter: true,
-//   render: name => `${name.first} ${name.last}`,
 }, {
   title: '最后登录时间',
   dataIndex: 'last',
@@ -93,7 +52,6 @@ const ConsoleIndex = React.createClass({
       type: 'json',
       crossOrigin: true,
       withCredentials: true,
-      // 'set-cookie': document.cookie,
     }).then(data => {
       const pagination = this.state.pagination;
       // Read total count from server

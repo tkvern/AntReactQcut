@@ -6,9 +6,6 @@ import './MainLayout.less';
 const SubMenu = Menu.SubMenu;
 
 const MainLayout = React.createClass({
-  // contextTypes: {
-  //   router: React.PropTypes.object.isRequired
-  // },
   getInitialState() {
     return {
       collapse: false,

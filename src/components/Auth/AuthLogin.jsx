@@ -12,7 +12,7 @@ let AuthLogin = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
+    // console.log('收到表单值：', this.props.form.getFieldsValue());
     let params = this.props.form.getFieldsValue(['username', 'password']);
     this.fetch(params);
   },
@@ -29,7 +29,7 @@ let AuthLogin = React.createClass({
   },
 
   fetch(params = {}) {
-    console.log('请求参数：', params); 
+    // console.log('请求参数：', params); 
     reqwest({
       url: 'http://z005.kmtongji.com/api/login',
       method: 'post',
@@ -40,7 +40,6 @@ let AuthLogin = React.createClass({
       crossOrigin: true,
       withCredentials: true,
     }).then(data => {
-      console.debug();
       if(data.hasOwnProperty('user')){
         var obj = data['user'];
         for (var prop in obj) {

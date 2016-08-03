@@ -4,9 +4,6 @@ import { Card } from 'antd';
 import './SimpleLayout.less';
 
 const SimpleLayout = React.createClass({
-  // contextTypes: {
-  //   router: React.PropTypes.object.isRequired
-  // },
   getInitialState() {
     return {
       collapse: false,

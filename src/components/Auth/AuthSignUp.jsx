@@ -22,14 +22,12 @@ let AuthSignUp = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
+    // console.log('收到表单值：', this.props.form.getFieldsValue());
     this.props.form.validateFields((errors, values) => {
       if (!!errors) {
         console.log('Errors in form!!!');
         return;
       }
-      console.log('Submit!!!');
-      console.log(values);
     });
 
     let params = this.props.form.getFieldsValue(['username', 'password', 'nick']);
@@ -48,7 +46,7 @@ let AuthSignUp = React.createClass({
   },
 
   fetch(params = {}) {
-    console.log('请求参数：', params);
+    // console.log('请求参数：', params);
     this.setState({ loading: true });
     reqwest({
       url: 'http://z005.kmtongji.com/api/register',
@@ -60,7 +58,6 @@ let AuthSignUp = React.createClass({
       crossOrigin: true,
       withCredentials: true,
     }).then(data => {
-      console.log(data);
       if(data.hasOwnProperty('user')){
         var obj = data['user'];
         for (var prop in obj) {
@@ -83,7 +80,7 @@ let AuthSignUp = React.createClass({
       callback();
     } else {
       let params = this.props.form.getFieldsValue(['username']);
-      console.log('请求参数：', params);
+      // console.log('请求参数：', params);
       reqwest({
         url: 'http://z005.kmtongji.com/api/register',
         method: 'post',
@@ -92,7 +89,6 @@ let AuthSignUp = React.createClass({
         },
         type: 'json',
       }).then(data => {
-        console.log(data);
         if(data.hasOwnProperty('name') && data['name'] == 'UserExistsError'){
           callback([new Error('抱歉，该用户名已被占用。')]);
         } else {

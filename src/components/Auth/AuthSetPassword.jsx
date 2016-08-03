@@ -22,14 +22,12 @@ let AuthSetPassword = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
+    // console.log('收到表单值：', this.props.form.getFieldsValue());
     this.props.form.validateFields((errors, values) => {
       if (!!errors) {
         console.log('Errors in form!!!');
         return;
       }
-      console.log('Submit!!!');
-      console.log(values);
     });
 
     let params = this.props.form.getFieldsValue(['password']);
@@ -44,7 +42,7 @@ let AuthSetPassword = React.createClass({
   },
 
   fetch(params = {}) {
-    console.log('请求参数：', params);
+    // console.log('请求参数：', params);
     this.setState({ loading: true });
     reqwest({
       url: 'http://z005.kmtongji.com/api/users/setPassword',

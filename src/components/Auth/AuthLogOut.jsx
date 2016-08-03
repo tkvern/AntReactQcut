@@ -31,7 +31,6 @@ let AuthLogOut = React.createClass({
       crossOrigin: true,
       withCredentials: true,
     }).then(data => {
-      console.log(data);
       if(data.hasOwnProperty('errno')){
         this.clearCookie();
         alert('退出成功！')
