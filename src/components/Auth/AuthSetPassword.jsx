@@ -15,6 +15,13 @@ let AuthSetPassword = React.createClass({
     router: React.PropTypes.object.isRequired
   },
 
+  componentWillMount() {
+    var userId = this.getCookie('_id');
+    if(!userId){
+      this.context.router.push('/login');
+    }
+  },
+
   handleReset(e) {
     e.preventDefault();
     this.props.form.resetFields();
@@ -32,6 +39,21 @@ let AuthSetPassword = React.createClass({
 
     let params = this.props.form.getFieldsValue(['password']);
     this.fetch(params);
+  },
+
+  getCookie(name) {  
+    var nameEQ = name + "=";  
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {  
+      var c = ca[i];
+      while (c.charAt(0)==' ') {         
+        c = c.substring(1,c.length);     
+      }  
+      if (c.indexOf(nameEQ) == 0) {
+        return unescape(c.substring(nameEQ.length,c.length));
+      }  
+    }  
+    return false;  
   },
 
   clearCookie(){
