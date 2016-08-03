@@ -20,21 +20,30 @@ const MainLayout = React.createClass({
   },
 
   componentWillMount() {
-    console.log('componentWillMount');
-    if(localStorage.getItem('userinfo') == null){
+    var userId = this.getCookie('_id');
+    if(!userId){
       this.context.router.push('/login');
     }
+  },
+
+  getCookie(name) {  
+    var nameEQ = name + "=";  
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {  
+      var c = ca[i];
+      while (c.charAt(0)==' ') {         
+        c = c.substring(1,c.length);     
+      }  
+      if (c.indexOf(nameEQ) == 0) {
+        return unescape(c.substring(nameEQ.length,c.length));
+      }  
+    }  
+    return false;  
   },
 
   getSelectIndex() {
     return this.context.router.isActive('/') ? 'laptop' :
       this.context.router.isActive('/order') ? 'order' : '';
-  },
-
-  getUserInfo() {
-    return localStorage.getItem('userinfo') != null ? 
-      JSON.parse(localStorage.getItem('userinfo')).user.nick : 
-      '未登录'
   },
 
   onCollapseChange() {
@@ -44,10 +53,14 @@ const MainLayout = React.createClass({
   },
   render() {
     let UserInfo;
-    if(localStorage.getItem('userinfo') != null){
+    if(this.getCookie('username')){
       UserInfo = (
         <div>
-          <li>{ this.getUserInfo() }</li>
+          <li>{ this.getCookie('username') }</li>
+          <li>|</li>
+          <li>
+            <Link to='/setpassword' style={{color: '#ddd'}}>修改密码</Link>
+          </li>
           <li>|</li>
           <li><AuthLogOut /></li>
         </div>

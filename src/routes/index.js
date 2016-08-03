@@ -6,7 +6,7 @@ import OrderIndex from '../components/Order/OrderIndex';
 import BarberIndex from '../components/Barber/BarberIndex';
 import AuthLogin from '../components/Auth/AuthLogin';
 import AuthSignUp from '../components/Auth/AuthSignUp';
-// import from '../components/Auth/AuthSetPassword.jsx';
+import AuthSetPassword from '../components/Auth/AuthSetPassword';
 
 const Routes = ({ history }) =>
   <Router history={history}>
@@ -14,7 +14,7 @@ const Routes = ({ history }) =>
     <Route path="/order" component={OrderIndex} />
     <Route path="/login" component={AuthLogin} />
     <Route path="/signup" component={AuthSignUp} />
-    <Route path="/setpassword" component={ConsoleIndex} />
+    <Route path="/setpassword" component={AuthSetPassword} />
     <Route path="*" component={NotFound}/>
   </Router>;
 

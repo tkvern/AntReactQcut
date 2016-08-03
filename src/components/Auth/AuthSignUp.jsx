@@ -36,6 +36,17 @@ let AuthSignUp = React.createClass({
     this.fetch(params);
   },
 
+  setCookie(name, value, seconds) {  
+    seconds = seconds || 0;
+    var expires = "";  
+    if (seconds != 0 ) {
+      var date = new Date();  
+      date.setTime(date.getTime()+(seconds*1000));  
+      expires = "; expires="+date.toGMTString();  
+    }  
+    document.cookie = name+"="+escape(value)+expires+"; path=/";
+  },
+
   fetch(params = {}) {
     console.log('请求参数：', params);
     this.setState({ loading: true });
@@ -46,14 +57,23 @@ let AuthSignUp = React.createClass({
         ...params,
       },
       type: 'json',
+      crossOrigin: true,
+      withCredentials: true,
     }).then(data => {
       console.log(data);
       if(data.hasOwnProperty('user')){
-        alert('注册成功！')
-        localStorage.setItem('userinfo', JSON.stringify(data));
+        var obj = data['user'];
+        for (var prop in obj) {
+          if(!obj.hasOwnProperty(prop)) continue;
+          
+          this.setCookie(prop, obj[prop], 36000);
+        }
+        alert('注册成功！');
         this.context.router.push('/');
       } else {
-        alert(data.message);
+        if(data.hasOwnProperty('message')){
+          alert(data['message']);
+        }
       }
     });
   },

@@ -13,6 +13,13 @@ let AuthLogOut = React.createClass({
     this.fetch();
   },
 
+  clearCookie(){
+    var keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
+    for (var i in keys) {
+      document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString() ;
+    }
+  },
+
   fetch(params = {}) {
     this.setState({ loading: true });
     reqwest({
@@ -21,11 +28,13 @@ let AuthLogOut = React.createClass({
       data: {
       },
       type: 'json',
+      crossOrigin: true,
+      withCredentials: true,
     }).then(data => {
       console.log(data);
       if(data.hasOwnProperty('errno')){
+        this.clearCookie();
         alert('退出成功！')
-        localStorage.removeItem('userinfo');
         this.context.router.push('/login');
       }
     });
