@@ -14,12 +14,12 @@ const SimpleLayout = React.createClass({
     router: React.PropTypes.object.isRequired
   },
 
-  componentWillMount() {
-    var userId = this.getCookie('_id');
-    if(!userId){
-      this.context.router.push('/login');
-    }
-  },
+  // componentWillMount() {
+  //   var userId = this.getCookie('_id');
+  //   if(!userId){
+  //     this.context.router.push('/login');
+  //   }
+  // },
 
   getCookie(name) {  
     var nameEQ = name + "=";  
